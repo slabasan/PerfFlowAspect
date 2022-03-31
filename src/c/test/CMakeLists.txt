@@ -14,7 +14,7 @@ foreach(TEST ${SMOKETESTS})
 endforeach()
 
 install(TARGETS ${SMOKETESTS}
-        DESTINATION tests)
+        DESTINATION test)
 
-install(PROGRAMS "${CMAKE_CURRENT_SOURCE_DIR}/t0001-cbinding-basic.t"
-        DESTINATION tests)
+install(PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/t0001-cbinding-basic.t
+        DESTINATION test)

@@ -15,35 +15,29 @@ jobs:
       - name: Setup Build Env
         run: |
           sudo apt-get update
-          sudo apt install clang llvm-dev libjansson-dev libssl-dev bison flex make cmake
+          sudo apt-get remove clang-9 llvm-9
+          sudo apt install llvm-7 llvm-7-dev clang-7 libclang-7-dev libjansson-dev libssl-dev bison flex make cmake
+          sudo ln -sf /usr/bin/clang-7 /usr/bin/clang
+          sudo ln -sf /usr/bin/clang++-7 /usr/bin/clang++
+          which clang++
           clang++ --version
 
-      - name: Build Parser
+      - name: Compile check
         run: |
-          cd src/c/parser
-          make VERBOSE=1
-
-      - name: Build Runtime
-        run: |
-          cd src/c/runtime
-          make VERBOSE=1
-
-      - name: Configure Weaver with CMake
-        run: |
-          cd src/c/weaver
-          mkdir build
+          cd src/c
+          mkdir build install
           cd build
-          LLVM_DIR=/usr/lib/llvm-6.0/lib/cmake cmake ..
-
-      - name: Build Weaver
-        run: |
-          cd src/c/weaver/build
+          export CMAKE_OPTS="-DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=../install"
+          echo -e ${CMAKE_OPTS}
+          cmake ${CMAKE_OPTS} ..
+          # build
           make VERBOSE=1
+          # install
+          make install
 
       - name: Run C Smoke Tests
         run: |
-          cd src/c/test
-          make
+          cd src/c/install/test
           ./t0001-cbinding-basic.t
 
   build-python:
