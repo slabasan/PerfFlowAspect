@@ -15,3 +15,6 @@ endforeach()
 
 install(TARGETS ${SMOKETESTS}
         DESTINATION tests)
+
+install(PROGRAMS "${CMAKE_CURRENT_SOURCE_DIR}/t0001-cbinding-basic.t"
+        DESTINATION tests)
