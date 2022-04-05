@@ -27,7 +27,7 @@ jobs:
           cd src/c
           mkdir build install
           cd build
-          export CMAKE_OPTS="-DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=../install"
+          export CMAKE_OPTS="-DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=../install"
           echo -e ${CMAKE_OPTS}
           cmake ${CMAKE_OPTS} ..
           # build
