@@ -3,7 +3,7 @@ set(SMOKETESTS
     smoketest2
 )
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c++11 -Xclang -load -Xclang ../weaver/build/weave/libWeavePass.so")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Xclang -load -Xclang ../weaver/weave/libWeavePass.so")
 set(perfflow_deps "-L../runtime -lperfflow_runtime -lcrypto")
 
 message(STATUS "Adding CXX unit tests")

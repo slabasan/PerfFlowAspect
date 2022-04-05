@@ -4,3 +4,4 @@ Version: ${PROJECT_VERSION}
 prefix=${CMAKE_INSTALL_PREFIX}
 libdir=${PKG_CONFIG_LIBDIR}
 Libs: ${PKG_CONFIG_LIBS}
+Cflags: -Wc,-Xclang,-load
