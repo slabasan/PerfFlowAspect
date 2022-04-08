@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.1)
 
 project(PerfFlowAspect VERSION "0.1.0")
 
-find_package(Clang REQUIRED CONFIG HINTS "/usr/lib/llvm-8/lib/cmake/clang")
+#find_package(Clang REQUIRED CONFIG HINTS "/usr/lib/llvm-8/lib/cmake/clang")
 
 # Fail if someone tries to config an in-source build.
 if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")

@@ -3,13 +3,14 @@ set(SMOKETESTS
     smoketest2
 )
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Xclang -load -Xclang ../weaver/weave/libWeavePass.so")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Xclang -load -Xclang ../weaver/weave/libWeavePass.so")
 set(perfflow_deps "-L../runtime -lperfflow_runtime -lcrypto")
 
 message(STATUS "Adding CXX unit tests")
 foreach(TEST ${SMOKETESTS})
     message(STATUS " [*] Adding test: ${TEST}")
     add_executable(${TEST} ${TEST}.cpp)
+    set_source_files_properties(${TEST}.cpp COMPILE_FLAGS "-v -std=c++11 -Xclang -load -Xclang ../weaver/weave/libWeavePass.so -fPIC")
     target_link_libraries(${TEST} ${perfflow_deps})
 endforeach()
 
