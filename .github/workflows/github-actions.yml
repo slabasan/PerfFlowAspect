@@ -6,7 +6,7 @@ jobs:
 
   build-c:
     name: check c bindings
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
 
     steps:
       # Checkout PerfFlowAspect repository under $GITHUB_WORKSPACE
@@ -17,7 +17,7 @@ jobs:
           sudo apt-get update
           #sudo apt-get remove clang-9 llvm-9
           #sudo apt --purge remove gcc-10 gcc-11 gcc-4.8 gcc-5 gcc-6
-          sudo apt install libjansson-dev libssl-dev bison flex make cmake clang libstdc++-9 #gcc-8 g++-8 libstdc++-8-dev
+          sudo apt install libjansson-dev libssl-dev bison flex make cmake clang-9 llvm-9 #gcc-8 g++-8 libstdc++-8-dev
           #sudo ln -sf /usr/bin/clang-7 /usr/bin/clang
           #sudo ln -sf /usr/bin/clang++-7 /usr/bin/clang++
           uname -a
@@ -34,6 +34,7 @@ jobs:
           #c++ --version
           #ls /usr/bin/../lib/gcc/x86_64-linux-gnu/
           sudo find / -print | grep cstdio
+          sudo find / -print | grep llvm/IR/CallSite.h
           #sudo ln -s /usr/share/llvm-7/cmake/ /usr/lib/llvm-7/lib/cmake/clang
           #sudo ln -s /usr/share/llvm-7/bin/clang /usr/lib/llvm-7/bin/clang-7
           #sudo ln -sf /usr/bin/clang /usr/lib/llvm-7/bin/clang-7
