@@ -15,14 +15,14 @@ jobs:
       - name: Setup Build Env
         run: |
           sudo apt-get update
-          sudo apt-get remove clang-9 llvm-9
+          #sudo apt-get remove clang-9 llvm-9
           #sudo apt --purge remove gcc-10 gcc-11 gcc-4.8 gcc-5 gcc-6
-          sudo apt install libjansson-dev libssl-dev bison flex make cmake #gcc-8 g++-8 libstdc++-8-dev
+          sudo apt install libjansson-dev libssl-dev bison flex make cmake clang libstdc++-9 #gcc-8 g++-8 libstdc++-8-dev
           #sudo ln -sf /usr/bin/clang-7 /usr/bin/clang
           #sudo ln -sf /usr/bin/clang++-7 /usr/bin/clang++
           uname -a
           #which clang++
-          #clang++ --version
+          clang++ --version
           which g++
           which gcc
           #which cc
@@ -38,26 +38,12 @@ jobs:
           #sudo ln -s /usr/share/llvm-7/bin/clang /usr/lib/llvm-7/bin/clang-7
           #sudo ln -sf /usr/bin/clang /usr/lib/llvm-7/bin/clang-7
 
-      - name: Build clang
-        run: |
-          git clone https://github.com/llvm/llvm-project.git
-          cd llvm-project
-          git checkout -b release/6.x origin/release/6.x
-          mkdir build && cd build
-          cmake ../llvm
-          make -j
-          sudo make -j install
-          which clang
-          which clang++
-          clang --version
-          clang++ --version
-
       - name: Compile check
         run: |
           cd src/c
           mkdir build install
           cd build
-          export CMAKE_OPTS="-DCMAKE_C_COMPILER=gcc-7 -DCMAKE_CXX_COMPILER=clang++-6.0 -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=../install"
+          export CMAKE_OPTS="-DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=clang++-9 -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=../install"
           echo -e ${CMAKE_OPTS}
           cmake ${CMAKE_OPTS} ..
           # build
